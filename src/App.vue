@@ -1,4 +1,5 @@
 <template>
+    <Modal />
     <div class="container-xl my-4">
         <Header />
         <div class="row g-4 mt-2">
@@ -25,10 +26,8 @@
     import CountryInfo from './components/CountryInfo.vue';
     import Header from './components/Header.vue';
     import { useCountryStore } from "./stores/country.js";
+    import Modal from './components/Modal.vue';
     import { onMounted } from 'vue';
     const countryFullList = useCountryStore();
     countryFullList.loadRates("USD");
-    onMounted(()=>{
-        console.log(countryFullList)
-    })
 </script>

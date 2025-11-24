@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-5 col-12 d-flex flex-column gap-2" :class="props.hideEl">
-        <div class="d-inline-block py-1 px-3 border bg-body-secondary rounded-4 align-self-start">
+        <div class="d-inline-block py-1 px-3 border bg-body-secondary rounded-4 align-self-start" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#chooseCountryModal">
             <div class="d-flex align-items-center gap-2">
                 <FlagRender :currency="props.currency" />
                 <p class="m-0">{{ country.currency }} - {{ country.name }}</p>

@@ -49,14 +49,15 @@
                     </b>
                 </template>
             </p>
-            <div class="d-flex flex-wrap gap-2 justify-content-between">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <p class="m-0 fw-bold">Open in</p>
                 <a target="_blank" :href="info.map" class="btn btn-sm d-inline-flex gap-2 btn-dark border rounded-4">
                     <i class="bi bi-google"></i>
-                    Open in Google Maps
+                    Google Maps
                 </a>
                 <a target="_blank" :href="info.map2" class="btn btn-sm d-inline-flex gap-2 btn-dark border rounded-4">
                     <i class="bi bi-geo"></i>
-                    Open in Open Streep Map
+                    <span>OpenStreetMap</span>
                 </a>
             </div>
             <!-- <li><strong>Timezone:</strong> {{ info.timezones[0] }}</li> -->
@@ -82,7 +83,6 @@ async function loadByCountry(countryName) {
         const data = await req.json();
         const c = data[0];
 
-        console.log(c)
 
         info.value = {
             name: c.name.official,

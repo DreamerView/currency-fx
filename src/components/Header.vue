@@ -9,8 +9,4 @@
 
     const countryFullList = useCountryStore();
 
-    watchEffect(()=>{
-        console.log(countryFullList.base)
-    })
-
 </script>
