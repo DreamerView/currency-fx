@@ -49,20 +49,6 @@
                     </b>
                 </template>
             </p>
-            <p class="m-0">
-                <i class="bi bi-clock-history"></i> Timezones: 
-
-                <span v-if="loading" class="spinner-border text-secondary" 
-                    role="status" style="width:1rem;height:1rem;">
-                    <span class="visually-hidden">Loading...</span>
-                </span>
-
-                <template v-else>
-                    <b>
-                        {{ Object.values(info.timezones).join(", ") }}
-                    </b>
-                </template>
-            </p>
             <div class="d-flex flex-wrap gap-2 justify-content-between">
                 <a target="_blank" :href="info.map" class="btn btn-sm d-inline-flex gap-2 btn-secondary rounded-4">
                     <i class="bi bi-google"></i>
