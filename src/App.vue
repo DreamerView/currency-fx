@@ -1,4 +1,5 @@
 <template>
+    <FindMyLocationModal />
     <Modal />
     <div class="container-xl my-4">
         <Header />
@@ -27,9 +28,9 @@
     import Header from './components/Header.vue';
     import { useCountryStore } from "./stores/country.js";
     import Modal from './components/Modal.vue';
-    import { computed } from 'vue';
+    import FindMyLocationModal from './components/FindMyLocationModal.vue';
+    import { computed, onMounted } from 'vue';
     const countryFullList = useCountryStore();
-    countryFullList.loadRates(countryFullList.currency.from.currencyCode);
     const info = computed(() =>
         countryFullList.fullList.find(f => f.currency === countryFullList.currency.from.currencyCode) || {
             name: "",
@@ -37,4 +38,21 @@
             symbol: ""
         }
     );
+    onMounted(() => {
+        // читаем валюту из sessionStorage
+        const saved = sessionStorage.getItem("LocalCurrency");
+
+        if (saved) {
+            // применяем сохранённую валюту
+            countryFullList.currency.from.currencyCode = saved;
+            countryFullList.currency.from.value = 0;
+
+            // загружаем её курс
+            countryFullList.loadRates(saved);
+        } else {
+            // если нет — загружаем стандартную валюту
+            countryFullList.loadRates(countryFullList.currency.from.currencyCode);
+        }
+    });
+
 </script>
