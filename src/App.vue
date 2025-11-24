@@ -9,6 +9,9 @@
                 <Table />
             </div>
             <div class="col-lg-4 col-12">
+                <CountryInfo country="kz"  />
+            </div>
+            <div class="col-lg-4 col-12">
                 <About />
             </div>
         </div>
@@ -19,6 +22,7 @@
     import Main from './components/Main.vue';
     import Table from './components/Table.vue';
     import About from './components/About.vue';
+    import CountryInfo from './components/CountryInfo.vue';
     import Header from './components/Header.vue';
     import { useCountryStore } from "./stores/country.js";
     import { onMounted } from 'vue';

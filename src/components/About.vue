@@ -1,7 +1,7 @@
 <template>
-    <div class="d-flex flex-column justify-content-center h-100">
-        <h2 class="m-0 text-md-center">About App 👋🏻</h2>
-        <div class="border rounded-4 p-3 m-0 bg-body-tertiary mt-3 d-flex flex-column gap-3">
+    <div>
+        <div class="border rounded-4 p-3 m-0 bg-body-tertiary d-flex flex-column gap-3">
+            <h4 class="m-0 mb-2">About App 👋🏻</h4>
             <p class="m-0"><i class="bi bi-activity"></i> Provider:
                 <div v-if="countryFullList.loading" class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
                     <span class="visually-hidden">Loading...</span>

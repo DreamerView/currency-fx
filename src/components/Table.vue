@@ -59,7 +59,7 @@
         <!-- LOAD MORE -->
         <div class="d-flex justify-content-center">
             <button 
-                class="btn bg-body-secondary border-secondary-subtle rounded-4 border btn-sm px-3"
+                class="btn btn-secondary border-secondary-subtle rounded-4 border btn-sm px-3"
                 v-if="filtered.length > 3"
                 @click="expanded = !expanded"
             >
