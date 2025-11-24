@@ -1,15 +1,15 @@
 <template>
-    <div :class="hideEl" class="m-0">
+    <div class="border rounded-4 p-3 m-0 bg-body-tertiary">
         
         <!-- SEARCH -->
         <input 
             type="text" 
             v-model="search"
-            class="form-control bg-body-secondary py-2 px-4 rounded-4 mb-3"
+            class="form-control border-secondary-subtle bg-body-secondary py-2 px-4 rounded-4 mb-3"
             placeholder="Search"
         />
 
-        <table class="table">
+        <table class="table table-transparent">
             <thead>
                 <tr>
                     <th scope="col">Currency</th>
@@ -49,7 +49,7 @@
         <!-- LOAD MORE -->
         <div class="d-flex justify-content-center">
             <button 
-                class="btn bg-body-secondary rounded-4 border btn-sm px-3"
+                class="btn bg-body-secondary border-secondary-subtle rounded-4 border btn-sm px-3"
                 v-if="filtered.length > 3"
                 @click="expanded = !expanded"
             >
@@ -93,18 +93,13 @@ const visibleList = computed(() => {
     if (expanded.value) return filtered.value;
     return filtered.value.slice(0, 3);
 });
-const hideEl = ref("");
-
-const updateWidth = () => {
-    hideEl.value = window.innerWidth >= 767?"border p-3 rounded-4":"border-top border-1 pt-4";
-}
-
-onMounted(() => {
-    window.addEventListener("resize", updateWidth);
-    updateWidth();
-});
-
-onBeforeUnmount(() => {
-    window.removeEventListener("resize", updateWidth);
-});
 </script>
+
+<style scoped>
+    .table-transparent,
+    .table-transparent td,
+    .table-transparent th {
+        background-color: transparent !important;
+    }
+
+</style>

@@ -9,7 +9,7 @@
     <div class="marquee rounded-2" v-if="!props.loading">
         <div class="marquee-track d-flex gap-3">
             <div class="marquee-item d-flex gap-3" v-for="n in 2" :key="n">
-                <div class="bg-body-secondary border rounded-3 py-1 px-3 d-flex align-items-center gap-2" v-for="(value, key) in props.list" :key="key">
+                <div class="bg-body-secondary border rounded-4 py-1 px-3 d-flex align-items-center gap-2" v-for="(value, key) in props.list" :key="key">
                     <FlagRender :currency="key" />
                     <p class="m-0">{{ key }}: <b>{{ value }}</b></p>
                 </div>

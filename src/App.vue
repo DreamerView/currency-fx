@@ -5,10 +5,10 @@
             <div class="col-12">
                 <Main :countryList="countryFullList.list" />
             </div>
-            <div class="col-md-5 col-12">
+            <div class="col-md-4 col-12">
                 <Table />
             </div>
-            <div class="col-md-7 col-12">
+            <div class="col-md-8 col-12">
                 <iframe 
                     src="https://s.tradingview.com/embed-widget/forex-cross-rates/?locale=en#%7B%22width%22%3A%22100%25%22%2C%22height%22%3A400%2C%22currencies%22%3A%5B%22USD%22%2C%22KZT%22%5D%7D" 
                     width="100%" 
