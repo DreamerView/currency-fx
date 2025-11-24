@@ -1,12 +1,12 @@
 <template>
-    <div class="p-4 bg-body-tertiary border rounded-4">
+    <div class="px-3 py-4 bg-body-tertiary border rounded-4">
 
         <div v-if="loading" class="spinner-border text-secondary fs-5 mb-3"></div>
 
         <!-- Шапка -->
         <div v-if="!loading" class="d-flex gap-3 align-items-center mb-3">
             <img :src="flag" width="48" loading="lazy" class="rounded-2" />
-            <div class="fw-bold fs-5">{{ title }}</div>
+            <h5 class="m-0">{{ title }}</h5>
         </div>
 
         <!-- Шаблон страны -->

@@ -1,6 +1,6 @@
 <template>
-    <div class="border rounded-4 p-3 m-0 bg-body-tertiary">
-        
+    <div class="border rounded-4 px-3 py-4 m-0 bg-body-tertiary">
+        <h5 class="mb-4">Multiple converter</h5>
         <!-- SEARCH -->
         <input 
             type="text" 
@@ -8,53 +8,67 @@
             class="form-control border-secondary-subtle bg-body-secondary py-2 px-4 rounded-4 mb-3"
             placeholder="Search"
         />
+        <div class="table-responsive">
+            <table class="table table-transparent">
+                <thead>
+                    <tr>
+                        <th scope="col">Currency</th>
+                        <th scope="col">Name</th>
+                        <th class="text-center" scope="col">Rate</th>
+                        <th class="text-end" scope="col">Converted</th>
+                    </tr>
+                </thead>
 
-        <table class="table table-transparent">
-            <thead>
-                <tr>
-                    <th scope="col">Currency</th>
-                    <th scope="col">Name</th>
-                    <th class="text-end" scope="col">Value</th>
-                </tr>
-            </thead>
+                <tbody>
 
-            <tbody>
+                    <!-- ALWAYS SHOW FIRST ITEM -->
+                    <tr v-if="firstItem">
+                        <th class="d-flex align-items-center gap-2" scope="row">
+                            <FlagRender :currency="firstItem.currency" />
+                            {{ firstItem.currency }}
+                        </th>
+                        <td>{{ firstItem.name }}</td>
+                        <td v-if="countryFullList.loading" class="text-center">
+                            <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </td>
+                        <td v-if="countryFullList.loading" class="text-end">
+                            <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </td>
+                        <td v-if="!countryFullList.loading" class="text-center">{{ firstItem.rate }}</td>
+                        <td v-if="!countryFullList.loading" class="text-end">{{ firstItem.converted }}</td>
+                    </tr>
 
-                <!-- ALWAYS SHOW FIRST ITEM -->
-                <tr v-if="firstItem">
-                    <th class="d-flex align-items-center gap-2" scope="row">
-                        <FlagRender :currency="firstItem.currency" />
-                        {{ firstItem.currency }}
-                    </th>
-                    <td>{{ firstItem.name }}</td>
-                    <td v-if="countryFullList.loading" class="text-end">
-                        <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </td>
-                    <td v-if="!countryFullList.loading" class="text-end">{{ firstItem.rate }}</td>
-                </tr>
+                    <!-- SEARCH / REMAINING ITEMS -->
+                    <tr 
+                        v-for="item in visibleList"
+                        :key="item.currency"
+                    >
+                        <th class="d-flex align-items-center gap-2" scope="row">
+                            <FlagRender :currency="item.currency" />
+                            {{ item.currency }}
+                        </th>
+                        <td>{{ item.name }}</td>
+                        <td v-if="countryFullList.loading" class="text-center">
+                            <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </td>
+                        <td v-if="countryFullList.loading" class="text-end">
+                            <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </td>
+                        <td v-if="!countryFullList.loading" class="text-center">{{ item.rate }}</td>
+                        <td v-if="!countryFullList.loading" class="text-end">{{ item.converted }}</td>
+                    </tr>
 
-                <!-- SEARCH / REMAINING ITEMS -->
-                <tr 
-                    v-for="item in visibleList"
-                    :key="item.currency"
-                >
-                    <th class="d-flex align-items-center gap-2" scope="row">
-                        <FlagRender :currency="item.currency" />
-                        {{ item.currency }}
-                    </th>
-                    <td>{{ item.name }}</td>
-                    <td v-if="countryFullList.loading" class="text-end">
-                        <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </td>
-                    <td v-if="!countryFullList.loading" class="text-end">{{ item.rate }}</td>
-                </tr>
-
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
         <!-- LOAD MORE -->
         <div class="d-flex justify-content-center">

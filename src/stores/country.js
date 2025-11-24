@@ -15,30 +15,44 @@ export const useCountryStore = defineStore("country", {
 
   getters: {
     fullList: (state) => {
-      // сначала объединяем list + rates
+
+      function formatNumber(num) {
+        return new Intl.NumberFormat("ru-RU", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(num);
+      }
+
+      // 1. объединяем list + rates
       let arr = state.list.map(item => ({
         ...item,
         code: item.country_code.toLowerCase(),
-        rate: state.rates[item.currency] ?? null
+        rate: state.rates[item.currency] ?? null,
+
+        // 🔥 multiple-mode: сразу считаем конвертацию
+        converted: state.currency.from.value
+          ? formatNumber(state.currency.from.value * (state.rates[item.currency] ?? 0))
+          : "0.00"
       }));
 
-      // код валюты FROM
+      // 2. код валюты FROM
       const fromCode = state.currency.from.currencyCode;
 
-      // найти страну
+      // 3. найти страну
       const found = arr.find(f => f.currency === fromCode);
 
       if (found) {
-        // убрать из старого места
+        // убрать старый
         arr = arr.filter(f => f.currency !== fromCode);
 
-        // вставить в индекс 0
+        // вставить первым
         arr.unshift(found);
       }
 
       return arr;
     }
   },
+
 
   actions: {
     async loadRates(code) {
