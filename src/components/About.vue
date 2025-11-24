@@ -2,9 +2,27 @@
     <div class="d-flex flex-column justify-content-center h-100">
         <h2 class="m-0 text-md-center">About App 👋🏻</h2>
         <div class="border rounded-4 p-3 m-0 bg-body-tertiary mt-3 d-flex flex-column gap-3">
-            <p class="m-0"><i class="bi bi-activity"></i> Provider: <b>{{ countryFullList.mainInfo?.provider || ""}}</b></p>
-            <p class="m-0"><i class="bi bi-clock-history"></i> Last update: <b>{{ countryFullList.mainInfo.last_update? new Date(countryFullList.mainInfo.last_update).toLocaleString() : ""}}</b></p>
-            <p class="m-0"><i class="bi bi-hourglass-top"></i> Next update: <b>{{ countryFullList.mainInfo.next_update? new Date(countryFullList.mainInfo.next_update).toLocaleString() : ""}}</b></p>
+            <div class="d-flex flex-wrap gap-2 m-0"><i class="bi bi-activity"></i> Provider:
+                <div 
+                    class="skeleton-item bg-body-secondary border rounded-3 py-1 px-3"
+                    v-if="countryFullList.loading"
+                ></div>
+                <b v-if="!countryFullList.loading">{{ countryFullList.mainInfo?.provider || ""}}</b>
+            </div>
+            <div class="d-flex flex-wrap gap-2 m-0"><i class="bi bi-clock-history"></i> Last update:
+                <div 
+                    class="skeleton-item bg-body-secondary border rounded-3 py-1 px-3"
+                    v-if="countryFullList.loading"
+                ></div>
+                <b v-if="!countryFullList.loading">{{ countryFullList.mainInfo.last_update? new Date(countryFullList.mainInfo.last_update).toLocaleString() : ""}}</b>
+            </div>
+            <div class="d-flex flex-wrap gap-2 m-0"><i class="bi bi-hourglass-top"></i> Next update: 
+                <div 
+                    class="skeleton-item bg-body-secondary border rounded-3 py-1 px-3"
+                    v-if="countryFullList.loading"
+                ></div>
+                <b v-if="!countryFullList.loading">{{ countryFullList.mainInfo.next_update? new Date(countryFullList.mainInfo.next_update).toLocaleString() : ""}}</b>
+            </div>
             <div class="d-flex flex-column gap-1 opacity-75" style="font-size: 0.8rem;">
                 <p class="m-0 text-center">Built with ❤️ by <a target="_blank" href="https://temirkhan.vercel.app">Temirkhan</a></p>
                 <p class="m-0 text-center">Project at <a target="_blank" href="https://github.com/DreamerView/skyflex">Github</a></p>
@@ -20,3 +38,37 @@
     const countryFullList = useCountryStore();
 
 </script>
+
+<style scoped>
+    .skeleton-item {
+        width: 200px;
+        height: 100%;
+        position: relative;
+        overflow: hidden; /* ВАЖНО! */
+    }
+
+    .skeleton-item::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,0.6) 50%,
+            rgba(255,255,255,0) 100%
+        );
+        animation: loading-shine 1.3s infinite;
+    }
+
+    @keyframes loading-shine {
+        from {
+            left: -100%;
+        }
+        to {
+            left: 100%;
+        }
+    }
+</style>

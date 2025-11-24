@@ -28,11 +28,11 @@
                     </th>
                     <td>{{ firstItem.name }}</td>
                     <td v-if="countryFullList.loading" class="text-end">
-                        <div class="spinner-border" role="status" style="width:1rem;height:1rem;">
+                        <div class="spinner-grow text-secondary" role="status" style="width:1rem;height:1rem;">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </td>
-                    <td v-if="countryFullList.loading" class="text-end">{{ firstItem.rate }}</td>
+                    <td v-if="!countryFullList.loading" class="text-end">{{ firstItem.rate }}</td>
                 </tr>
 
                 <!-- SEARCH / REMAINING ITEMS -->
@@ -46,7 +46,7 @@
                     </th>
                     <td>{{ item.name }}</td>
                     <td v-if="countryFullList.loading" class="text-end">
-                        <div class="spinner-border" role="status" style="width:1rem;height:1rem;">
+                        <div class="spinner-grow text-secondary" role="status" style="width:1rem;height:1rem;">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </td>
