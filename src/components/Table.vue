@@ -28,7 +28,7 @@
                     </th>
                     <td>{{ firstItem.name }}</td>
                     <td v-if="countryFullList.loading" class="text-end">
-                        <div class="spinner-grow text-secondary" role="status" style="width:1rem;height:1rem;">
+                        <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </td>
@@ -46,7 +46,7 @@
                     </th>
                     <td>{{ item.name }}</td>
                     <td v-if="countryFullList.loading" class="text-end">
-                        <div class="spinner-grow text-secondary" role="status" style="width:1rem;height:1rem;">
+                        <div class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </td>
