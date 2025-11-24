@@ -50,11 +50,11 @@
                 </template>
             </p>
             <div class="d-flex flex-wrap gap-2 justify-content-between">
-                <a target="_blank" :href="info.map" class="btn btn-sm d-inline-flex gap-2 btn-secondary rounded-4">
+                <a target="_blank" :href="info.map" class="btn btn-sm d-inline-flex gap-2 btn-dark border rounded-4">
                     <i class="bi bi-google"></i>
                     Open in Google Maps
                 </a>
-                <a target="_blank" :href="info.map2" class="btn btn-sm d-inline-flex gap-2 btn-secondary rounded-4">
+                <a target="_blank" :href="info.map2" class="btn btn-sm d-inline-flex gap-2 btn-dark border rounded-4">
                     <i class="bi bi-geo"></i>
                     Open in Open Streep Map
                 </a>
