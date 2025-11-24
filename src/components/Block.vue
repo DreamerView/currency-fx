@@ -10,7 +10,7 @@
 
         <div class="d-flex gap-1 align-items-center" style="font-size: 3rem;">
             <p class="m-0 p-0">{{ country.symbol || "" }}</p>
-            <input type="text" class="form-control border-0 p-0 m-0" style="font-size: 3rem;" placeholder="0" />
+            <input type="text" class="form-control border-0 p-0 m-0" style="font-size: 3rem;" placeholder="0" inputmode="tel" />
         </div>
     </div>
 </template>
