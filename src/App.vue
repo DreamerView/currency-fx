@@ -10,7 +10,7 @@
                 <Table />
             </div>
             <div class="col-lg-4 col-12">
-                <CountryInfo currency="USD" country="us"  />
+                <CountryInfo :currency="info.currency" :country="info.code"  />
             </div>
             <div class="col-lg-4 col-12">
                 <About />
@@ -27,7 +27,14 @@
     import Header from './components/Header.vue';
     import { useCountryStore } from "./stores/country.js";
     import Modal from './components/Modal.vue';
-    import { onMounted } from 'vue';
+    import { computed } from 'vue';
     const countryFullList = useCountryStore();
-    countryFullList.loadRates("USD");
+    countryFullList.loadRates(countryFullList.currency.from.currencyCode);
+    const info = computed(() =>
+        countryFullList.fullList.find(f => f.currency === countryFullList.currency.from.currencyCode) || {
+            name: "",
+            currency: props.currency,
+            symbol: ""
+        }
+    );
 </script>

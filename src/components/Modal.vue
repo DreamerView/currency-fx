@@ -19,6 +19,7 @@
                             v-for="list in filteredList"
                             :key="list.currency"
                             style="cursor: pointer;"
+                            @click="chooseCountry(list.currency)"
                             class="d-flex align-items-center gap-2 bg-body-secondary rounded-4 border px-3 py-1"
                         >
                             <FlagRender :currency="list.currency" />
@@ -36,6 +37,7 @@
 import { ref, computed } from "vue";
 import { useCountryStore } from "../stores/country.js";
 import FlagRender from "./FlagRender.vue";
+import * as bootstrap from "bootstrap";
 
 const countryFullList = useCountryStore();
 const searchQuery = ref("");
@@ -51,4 +53,17 @@ const filteredList = computed(() => {
         item.currency.toLowerCase().includes(q)
     );
 });
+
+const chooseCountry = (code) => {
+    if(countryFullList.lastSelectedModal==="from") {
+        countryFullList.currency.from.currencyCode = code;
+        countryFullList.loadRates(code);
+    } else {
+        countryFullList.currency.to.currencyCode = code;
+    }
+    const modalEl = document.getElementById("chooseCountryModal");
+    const modal = bootstrap.Modal.getInstance(modalEl);
+
+    modal.hide();
+}
 </script>

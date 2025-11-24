@@ -7,28 +7,41 @@ export const useCountryStore = defineStore("country", {
     rates: {},       // { USD: {...}, EUR: {...} }
     mainInfo:{},
     base: null,
+    lastSelectedModal: "from",
     loading: true,
-    error: null
+    error: null,
+    currency:{from:{currencyCode:"USD",value:0},to:{currencyCode:"EUR",value:0}}
   }),
 
   getters: {
-    // объединяем list + rates + code
     fullList: (state) => {
-      return state.list.map(item => ({
+      // сначала объединяем list + rates
+      let arr = state.list.map(item => ({
         ...item,
         code: item.country_code.toLowerCase(),
         rate: state.rates[item.currency] ?? null
       }));
+
+      // код валюты FROM
+      const fromCode = state.currency.from.currencyCode;
+
+      // найти страну
+      const found = arr.find(f => f.currency === fromCode);
+
+      if (found) {
+        // убрать из старого места
+        arr = arr.filter(f => f.currency !== fromCode);
+
+        // вставить в индекс 0
+        arr.unshift(found);
+      }
+
+      return arr;
     }
   },
 
   actions: {
     async loadRates(code) {
-      // Если уже есть в state → повторно не скачиваем
-      if (this.rates[code]) {
-        this.base = code;
-        return;
-      }
 
       this.loading = true;
       this.error = null;
