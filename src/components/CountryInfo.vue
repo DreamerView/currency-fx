@@ -4,13 +4,8 @@
         <div v-if="loading" class="spinner-border text-secondary fs-5 mb-3" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <div v-if="!loading" class="d-flex align-items-center mb-3">
-            <img 
-                :src="info.flag" 
-                width="40"
-                class="rounded-2 me-3"
-                alt="flag"
-            />
+        <div v-if="!loading" class="d-flex gap-3 align-items-center mb-3">
+            <FlagRender :currency="props.currency"/>
             <div class="fw-bold fs-5">{{ info.name }}</div>
         </div>
 
@@ -67,9 +62,11 @@
 
 <script setup>
 import { ref, watch } from "vue";
+import FlagRender from "./FlagRender.vue";
 
 const props = defineProps({
-    country: String // <-- теперь передаём вручную!
+    country: String, // <-- теперь передаём вручную!
+    currency: String
 });
 
 const loading = ref(true);

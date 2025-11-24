@@ -10,7 +10,7 @@
                 <Table />
             </div>
             <div class="col-lg-4 col-12">
-                <CountryInfo country="us"  />
+                <CountryInfo currency="USD" country="us"  />
             </div>
             <div class="col-lg-4 col-12">
                 <About />
