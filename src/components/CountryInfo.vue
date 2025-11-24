@@ -39,6 +39,30 @@
                 </div>
                 <b v-if="!loading">{{ info.area }}</b>
             </p>
+            <p class="m-0"><i class="bi bi-translate"></i> Languages: 
+                <div v-if="loading" class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <template v-if="!loading">
+                    <b v-for="(value, key, index) in info.lang" :key="key">
+                        {{ value }}<span v-if="index < Object.keys(info.lang).length - 1">, </span>
+                    </b>
+                </template>
+            </p>
+            <p class="m-0">
+                <i class="bi bi-clock-history"></i> Timezones: 
+
+                <span v-if="loading" class="spinner-border text-secondary" 
+                    role="status" style="width:1rem;height:1rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </span>
+
+                <template v-else>
+                    <b>
+                        {{ Object.values(info.timezones).join(", ") }}
+                    </b>
+                </template>
+            </p>
             <div class="d-flex flex-wrap gap-2 justify-content-between">
                 <a target="_blank" :href="info.map" class="btn btn-sm d-inline-flex gap-2 btn-secondary rounded-4">
                     <i class="bi bi-google"></i>
@@ -75,7 +99,7 @@ async function loadByCountry(countryName) {
         console.log(c)
 
         info.value = {
-            name: c.name.common,
+            name: c.name.official,
             flag: c.flags.svg,
             capital: c.capital?.[0] || "-",
             region: c.region,
@@ -83,7 +107,8 @@ async function loadByCountry(countryName) {
             area: `${c.area.toLocaleString()} km²`,
             timezones: c.timezones,
             map: c.maps.googleMaps,
-            map2:c.maps.openStreetMaps
+            map2:c.maps.openStreetMaps,
+            lang:c.languages
         };
 
     } catch (err) {

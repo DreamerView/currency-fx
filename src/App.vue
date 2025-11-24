@@ -9,7 +9,7 @@
                 <Table />
             </div>
             <div class="col-lg-4 col-12">
-                <CountryInfo country="kz"  />
+                <CountryInfo country="us"  />
             </div>
             <div class="col-lg-4 col-12">
                 <About />
