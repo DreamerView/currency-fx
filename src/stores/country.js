@@ -5,6 +5,7 @@ export const useCountryStore = defineStore("country", {
   state: () => ({
     list: countryList,
     rates: {},       // { USD: {...}, EUR: {...} }
+    mainInfo:{},
     base: null,
     loading: false,
     error: null
@@ -37,6 +38,8 @@ export const useCountryStore = defineStore("country", {
         const res = await fetch(url);
         const data = await res.json();
 
+        console.log(data)
+
         if (data.result !== "success") {
           throw new Error("API Error");
         }
@@ -44,7 +47,9 @@ export const useCountryStore = defineStore("country", {
         // Сохраняем в state, можно переиспользовать
         this.rates = data.rates;
         this.base = code;
-
+        this.mainInfo['last_update'] = data.time_last_update_utc;
+        this.mainInfo['next_update'] = data.time_next_update_utc;
+        this.mainInfo['provider'] = data.provider;
       } catch (err) {
         this.error = err.message;
       } finally {
