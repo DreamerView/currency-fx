@@ -17,7 +17,7 @@
         </div>
 
         <!-- Поле ввода -->
-        <div class="d-flex gap-1 align-items-center" style="font-size: 3rem;">
+        <div class="d-flex gap-1 align-items-center" :style="{ fontSize: fontSize + 'px' }">
             <p class="m-0 p-0">{{ info.symbol }}</p>
 
             <input
@@ -40,6 +40,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import Cleave from "cleave.js";
 import { useCountryStore } from "../stores/country.js";
 import FlagRender from "./FlagRender.vue";
+import { useAutoFontResize } from "../utils/useAutoFontResize.js";
 
 const props = defineProps({
     currency: String,
@@ -100,4 +101,9 @@ watch(
         cleave.setRawValue(val || "");
     }
 );
+
+const {fontSize} = useAutoFontResize(inputRef, () => props.modelValue, {
+  baseFont: 48,
+  minFont: 20
+});
 </script>
