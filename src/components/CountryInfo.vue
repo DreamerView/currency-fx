@@ -5,7 +5,7 @@
 
         <!-- Шапка -->
         <div v-if="!loading" class="d-flex gap-3 align-items-center mb-3">
-            <img :src="flag" width="48" class="rounded-2" />
+            <img :src="flag" width="48" loading="lazy" class="rounded-2" />
             <div class="fw-bold fs-5">{{ title }}</div>
         </div>
 

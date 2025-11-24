@@ -25,16 +25,23 @@
     const to   = country.currency.to;
 
     const changeCurrency = () => {
-        const lastValue = from.value;
-        const lastCode = from.currencyCode;
+        const fromCode = from.currencyCode;
+        const toCode = to.currencyCode;
 
-        from.value = to.value;
-        from.currencyCode = to.currencyCode;
+        const fromValue = from.value;
+        const toValue = to.value;
 
-        to.value = lastValue;
-        to.currencyCode = lastCode;
-        country.loadRates(from.currencyCode);
+        // меняем валюты местами
+        from.currencyCode = toCode;
+        to.currencyCode = fromCode;
+
+        country.loadRates(from.currencyCode)
+
+        // меняем значения местами
+        from.value = fromValue;
+
     };
+
 
     const fromValue = computed({
         get: () => from.value,
@@ -57,20 +64,19 @@
         // Преобразуем в строку для защиты от scientific notation
         let s = num.toString();
 
-        // Если число в экспоненциальной форме → нормализуем
         if (s.includes('e')) {
             num = Number(num.toFixed(10));
             s = num.toString();
         }
 
-        // Ограничиваем слишком длинные числа (защита от "бесконечных" вводов)
         if (s.length > 20) {
             num = Number(s.slice(0, 20));
         }
 
-        // 🔥 Главное округление — два знака после запятой
-        return Number(num.toFixed(2));
+        return Number(num.toFixed(2)); // ВОЗВРАЩАЕМ ЧИСЛО
     }
+
+
 
 
 
@@ -78,13 +84,6 @@
 
     const toComputed = computed({
         get() {
-            if (isTypingTo.value) {
-                // Показываем то, что пользователь вводит руками,
-                // НИЧЕГО НЕ ОКРУГЛЯЕМ во время набора.
-                return to.value;
-            }
-
-            // Автоматический пересчёт — С ОКРУГЛЕНИЕМ!
             return formatCurrencyResult(from.value * rate.value);
         },
 
