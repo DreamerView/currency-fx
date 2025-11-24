@@ -7,7 +7,7 @@ export const useCountryStore = defineStore("country", {
     rates: {},       // { USD: {...}, EUR: {...} }
     mainInfo:{},
     base: null,
-    loading: false,
+    loading: true,
     error: null
   }),
 
