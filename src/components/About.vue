@@ -14,6 +14,12 @@
                 </div>
                 <b v-if="!countryFullList.loading">https://restcountries.com</b>
             </p>
+            <p class="m-0"><i class="bi bi-flag"></i> Flag CDN:
+                <div v-if="countryFullList.loading" class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <b v-if="!countryFullList.loading">https://flagcdn.com</b>
+            </p>
             <p class="m-0"><i class="bi bi-clock-history"></i> Last update:
                 <div v-if="countryFullList.loading" class="spinner-border text-secondary" role="status" style="width:1rem;height:1rem;">
                     <span class="visually-hidden">Loading...</span>

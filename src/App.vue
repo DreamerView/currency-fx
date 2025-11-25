@@ -40,7 +40,7 @@
     );
     onMounted(() => {
         // читаем валюту из sessionStorage
-        const saved = sessionStorage.getItem("LocalCurrency");
+        const saved = localStorage.getItem("LocalCurrency");
 
         if (saved) {
             // применяем сохранённую валюту

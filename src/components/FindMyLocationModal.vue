@@ -32,9 +32,6 @@
 
     const fetchData = async() => {
         try {
-            const get = sessionStorage.getItem("LocalCurrency");
-            console.log(get)
-            if(get) return;
             const req = await fetch("https://ipwho.is");
             if(!req.ok) throw new Error("Fetching error");
             const res = await req.json();
@@ -42,6 +39,8 @@
             country.name = find.name;
             country.code = find.country_code;
             country.currency = find.currency;
+            const get = localStorage.getItem("LocalCurrency");
+            if(get && get.toLowerCase() === find.currency.toLowerCase()) return;
             const modalEl = document.getElementById("findMyLocationModal");
             const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
             modal.show();
@@ -58,7 +57,7 @@
         const modalEl = document.getElementById("findMyLocationModal");
         const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
         modal.hide();
-        sessionStorage.setItem("LocalCurrency",country.currency);
+        localStorage.setItem("LocalCurrency",country.currency);
     }
 
     onMounted(()=>
